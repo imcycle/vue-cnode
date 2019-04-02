@@ -1,0 +1,18 @@
+.nav {
+  height: 80px;
+  padding-top: 8px;
+  border-top: 1px solid #333;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.nav-item {
+  text-align: center;
+}
+.nav-item img {
+  width: 44px;
+  height: 44px;
+}
