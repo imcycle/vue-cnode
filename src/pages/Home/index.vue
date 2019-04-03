@@ -5,7 +5,11 @@
     <C1 v-bind:msg="msg" v-on:listenToChildEvent="asdfasdf"/>
     <button v-on:click="handleButtonClick">设置为2222</button>
     <button v-on:click="handleButtonClick1">设置为3333</button>
-
+    <van-button type="default">默认按钮</van-button>
+    <van-button type="primary">主要按钮</van-button>
+    <van-button type="info">信息按钮</van-button>
+    <van-button type="warning">警告按钮</van-button>
+    <van-button type="danger">危险按钮</van-button>
     <Navigation/>
   </div>
 </template>
