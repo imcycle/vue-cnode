@@ -11,6 +11,18 @@
     <van-button type="warning">警告按钮</van-button>
     <van-button type="danger">危险按钮</van-button>
     <Navigation/>
+
+    <div v-for="item in dataList" v-bind:key="item.id" @click="handleJump(item)">
+      <span>{{item.name}}</span>
+      <span v-if="item.num===0">
+        <button @click="e => handleAddClick(e, item)">+</button>
+      </span>
+      <span v-else>
+        <button>-</button>
+        <span>{{item.num}}</span>
+        <button @click="e => handleAddClick(e, item)">+</button>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -27,6 +39,10 @@ export default {
   },
   data: function() {
     return {
+      dataList: [
+        { id: 1, name: "asdf", num: 0 },
+        { id: 2, name: "aeg3", num: 0 }
+      ],
       msg: "1111"
     };
   },
@@ -34,6 +50,16 @@ export default {
     this.fetchDataList();
   },
   methods: {
+    handleJump: function(item) {
+      console.log("jump");
+      this.$router.push(`/detail/${item.id}`);
+    },
+    handleAddClick: (e, item) => {
+      e.stopPropagation();
+      item.num++;
+      console.log("add");
+    },
+
     fetchDataList: function() {
       fetch("/topics");
     },
