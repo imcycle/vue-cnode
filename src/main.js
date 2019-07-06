@@ -1,18 +1,13 @@
-import Vue from 'vue';
-import App from './App'
-import router from './router';
-
-import Vant from 'vant';
-import 'vant/lib/index.css';
-Vue.use(Vant);
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
 new Vue({
-  el: '#app',
   router,
-  template: '<App/>',
-  components: {
-    App
-  }
-})
+  store,
+  render: h => h(App)
+}).$mount('#app')
