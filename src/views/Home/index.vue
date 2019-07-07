@@ -81,7 +81,7 @@ export default {
     onPullRefresh: function() {
       this.fetchTopicList(true);
     },
-    handleTabsChange: function(name, title) {
+    handleTabsChange: function(name) {
       this.tabName = name;
       this.fetchTopicList(true);
     }
@@ -92,12 +92,5 @@ export default {
 <style scoped>
 .home {
   padding-bottom: 50px;
-}
-
-.flex {
-  display: flex;
-}
-.flex-1 {
-  flex: 1;
 }
 </style>

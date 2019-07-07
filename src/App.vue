@@ -65,6 +65,14 @@ p {
 .mr-20 {
   padding-right: 20px;
 }
+
+.flex {
+  display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

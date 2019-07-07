@@ -1,38 +1,84 @@
+import {
+  Toast
+} from 'vant';
 
 const defaultInit = {
-  returnResponse: false,  // 返回原数据  默认false  
-  returnBoolean: false,   // 返回布尔    默认false
-  errorToast: true,       // 错误toast  默认true
+  returnResponse: false, // 返回原数据  默认false  
+  returnBoolean: false, // 返回布尔    默认false
+  loadingToast: true, // 加载中toast 默认true
+  errorToast: true, // 错误toast  默认true
+}
+
+let fetchCount = 0;
+
+const startLoading = (loadingToast) => {
+  if (!loadingToast) {
+    return;
+  }
+  if (fetchCount === 0) {
+    Toast.loading({
+      forbidClick: true
+    });
+  }
+  fetchCount++;
+}
+
+const endLoading = (loadingToast) => {
+  if (!loadingToast) {
+    return;
+  }
+  fetchCount--;
+  if (fetchCount === 0) {
+    Toast.clear();
+  }
 }
 
 export default (input, init = {}) => {
-  const { returnResponse, returnBoolean, errorToast } = {
+  const {
+    returnResponse,
+    returnBoolean,
+    loadingToast,
+    errorToast
+  } = {
     ...defaultInit,
     ...init
   };
+
+  startLoading(loadingToast);
+
   return fetch(input, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Duliday-Token': localStorage.DL_WO_token,
-    },
-    ...init,
-  })
+      headers: {
+        'Content-Type': 'application/json',
+        'Duliday-Token': localStorage.DL_WO_token,
+      },
+      ...init,
+    })
     .then(res => {
-      if (returnResponse) return res;  // returnResponse
+      endLoading(loadingToast);
+      if (returnResponse) { // returnResponse
+        return res;
+      }
       return res.json();
     })
     .then(res => {
-      if (returnResponse) return res;  // returnResponse
+      if (returnResponse) { // returnResponse
+        return res;
+      }
       if (res.success === true) {
-        if (returnBoolean) return true;  // returnBoolean
+        if (returnBoolean) { // returnBoolean
+          return true;
+        }
         return res.data;
       } else {
-        if (errorToast) console.log('err', res.data);  // errorToast
+        if (errorToast) { // errorToast
+          Toast.fail(res.data);
+        }
         return false;
       }
     })
     .catch(err => {
       console.log(err);
+      endLoading(loadingToast);
       return false;
     });
 };
