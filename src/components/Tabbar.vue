@@ -47,6 +47,13 @@ export default {
       active: "home"
     };
   },
+
+  mounted() {
+    this.active = (
+      this.tabbars.find(d => d.path === window.location.pathname) || {}
+    ).key;
+  },
+
   methods: {
     handleTabbarClick(path) {
       this.$router.push(path);
