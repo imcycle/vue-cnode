@@ -1,8 +1,12 @@
 <template>
   <van-tabbar v-model="active">
-    <van-tabbar-item name="home" icon="home-o">首页</van-tabbar-item>
-    <van-tabbar-item name="about" icon="notes-o">关于</van-tabbar-item>
-    <van-tabbar-item name="me" icon="contact">我的</van-tabbar-item>
+    <van-tabbar-item
+      v-for="options in tabbars"
+      v-bind:key="options.key"
+      v-bind:name="options.key"
+      v-bind:icon="options.icon"
+      v-on:click="handleTabbarClick(options.path)"
+    >{{options.name}}</van-tabbar-item>
   </van-tabbar>
 </template>
 
@@ -17,12 +21,35 @@ export default {
   },
   data() {
     return {
+      tabbars: [
+        {
+          id: 1,
+          key: "home",
+          name: "首页",
+          path: "/",
+          icon: "home-o"
+        },
+        {
+          id: 2,
+          key: "about",
+          name: "关于",
+          path: "/about",
+          icon: "notes-o"
+        },
+        {
+          id: 3,
+          key: "center",
+          name: "我的",
+          path: "/center",
+          icon: "contact"
+        }
+      ],
       active: "home"
     };
   },
   methods: {
-    beforeCreate() {
-      console.log(this, "beforeCreate");
+    handleTabbarClick(path) {
+      this.$router.push(path);
     }
   }
 };
