@@ -54,16 +54,14 @@ export default (input, init = {}) => {
       ...init,
     })
     .then(res => {
-      endLoading(loadingToast);
       if (returnResponse) { // returnResponse
+        endLoading(loadingToast);
         return res;
       }
       return res.json();
     })
     .then(res => {
-      if (returnResponse) { // returnResponse
-        return res;
-      }
+      endLoading(loadingToast);
       if (res.success === true) {
         if (returnBoolean) { // returnBoolean
           return true;
