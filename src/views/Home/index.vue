@@ -18,8 +18,14 @@
           <van-image width="100" height="100" :src="item.author.avatar_url" />
           <div class="flex-1 pl-20">
             <h3>{{item.title}}</h3>
-            <div>{{item.reply_count}}/{{item.visit_count}}</div>
+            <div>
+              <van-tag
+                type="danger"
+              >{{item.top && '置顶' || (item.good && '精选') || tabMap.get(item.tab)}}</van-tag>
+              {{item.reply_count}}/{{item.visit_count}}
+            </div>
             <div>{{item.create_at}}</div>
+            <button @click="handleCollectClick(item.id)">收藏</button>
           </div>
         </div>
       </van-list>
@@ -29,7 +35,7 @@
 </template>
 
 <script>
-import { PullRefresh, Tab, Tabs, List, Image } from "vant";
+import { PullRefresh, Tab, Tabs, List, Image, Tag } from "vant";
 import Tabbar from "@/components/Tabbar.vue";
 import fetch from "@/utils/fetch";
 import { api_topics } from "@/utils/urls";
@@ -41,10 +47,17 @@ export default {
     [Tabs.name]: Tabs,
     [List.name]: List,
     [Image.name]: Image,
+    [Tag.name]: Tag,
     Tabbar
   },
   data() {
     return {
+      tabMap: new Map([
+        ["good", "精华"],
+        ["share", "分享"],
+        ["ask", "问答"],
+        ["job", "招聘"]
+      ]),
       isPullRefreshLoading: false,
       tab: "all",
       page: 0,
@@ -84,6 +97,9 @@ export default {
     handleTabsChange: function(name) {
       this.tabName = name;
       this.fetchTopicList(true);
+    },
+    handleCollectClick: function(id) {
+      console.log(id);
     }
   }
 };
