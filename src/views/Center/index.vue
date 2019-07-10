@@ -12,6 +12,9 @@
 <script>
 import { Button, Cell } from "vant";
 import Tabbar from "@/components/Tabbar";
+import fetch from "@/utils/fetch";
+import { api_accesstoken } from "@/utils/urls";
+
 export default {
   name: "center",
   components: {
@@ -25,8 +28,13 @@ export default {
     };
   },
   methods: {
-    handleLoginClick: function() {
-      console.log(this.token);
+    handleLoginClick: async function() {
+      let data = await fetch(api_accesstoken, {
+        methods: "post",
+        body: JSON.stringify({ accesstoken: this.token })
+      });
+      console.log(data);
+      localStorage.WM_token = this.token;
     }
   }
 };

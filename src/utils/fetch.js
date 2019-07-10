@@ -49,7 +49,7 @@ export default (input, init = {}) => {
   return fetch(input, {
       headers: {
         'Content-Type': 'application/json',
-        'Duliday-Token': localStorage.DL_WO_token,
+        'Duliday-Token': localStorage.WM_token,
       },
       ...init,
     })
