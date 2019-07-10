@@ -55,13 +55,15 @@ export default (input, init = {}) => {
     })
     .then(res => {
       if (returnResponse) { // returnResponse
-        endLoading(loadingToast);
         return res;
       }
       return res.json();
     })
     .then(res => {
       endLoading(loadingToast);
+      if (returnResponse) { // returnResponse
+        return res;
+      }
       if (res.success === true) {
         if (returnBoolean) { // returnBoolean
           return true;
@@ -69,7 +71,7 @@ export default (input, init = {}) => {
         return res.data;
       } else {
         if (errorToast) { // errorToast
-          Toast.fail(res.data);
+          Toast.fail(res.error_msg);
         }
         return false;
       }
