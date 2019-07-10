@@ -9,6 +9,14 @@
 </template>
 
 <style>
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
 html,
 body,
 h1,
@@ -66,6 +74,10 @@ p {
   padding-right: 20px;
 }
 
+.lh-1_5 {
+  line-height: 1.5;
+}
+
 .flex {
   display: flex;
 }
@@ -73,23 +85,9 @@ p {
   flex: 1;
 }
 
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.space-nowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 </style>

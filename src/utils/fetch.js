@@ -71,7 +71,7 @@ export default (input, init = {}) => {
         return res.data;
       } else {
         if (errorToast) { // errorToast
-          Toast.fail(res.error_msg);
+          Toast.fail(res.error_msg || '失败');
         }
         return false;
       }

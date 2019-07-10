@@ -26,7 +26,6 @@ export default {
     [Image.name]: Image,
     [Cell.name]: Cell,
     [Toast.name]: Toast,
-
     Tabbar
   },
   data() {
@@ -65,7 +64,7 @@ export default {
 
 <style scoped>
 .user-card {
-  padding: 30px 0;
+  padding: 0.3rem 0;
   border-bottom: 1px solid #ddd;
 }
 </style>

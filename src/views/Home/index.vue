@@ -15,17 +15,25 @@
         @load="fetchTopicList"
       >
         <div class="flex mb-20" v-for="item in topicList" :key="item.id">
-          <van-image width="100" height="100" :src="item.author.avatar_url" />
+          <van-image width="1rem" height="1rem" :src="item.author.avatar_url" />
           <div class="flex-1 pl-20">
-            <h3>{{item.title}}</h3>
             <div>
+              <h3 class="space-nowrap lh-1_5" style="width: 2rem;">{{item.title}}</h3>
+            </div>
+            <div class="lh-1_5">
               <van-tag
                 type="danger"
               >{{item.top && '置顶' || (item.good && '精选') || tabMap.get(item.tab)}}</van-tag>
               {{item.reply_count}}/{{item.visit_count}}
             </div>
-            <div>{{item.create_at}}</div>
-            <button @click="handleCollectClick(item.id)">收藏</button>
+            <div class="lh-1_5">{{item.create_at}}</div>
+            <van-button
+              plain
+              hairline
+              type="primary"
+              size="small"
+              @click="handleCollectClick(item.id)"
+            >收藏</van-button>
           </div>
         </div>
       </van-list>
@@ -35,10 +43,10 @@
 </template>
 
 <script>
-import { PullRefresh, Tab, Tabs, List, Image, Tag } from "vant";
+import { PullRefresh, Tab, Tabs, List, Image, Tag, Button, Toast } from "vant";
 import Tabbar from "@/components/Tabbar.vue";
 import fetch from "@/utils/fetch";
-import { api_topics } from "@/utils/urls";
+import { api_topics, api_topic_collect } from "@/utils/urls";
 export default {
   name: "home",
   components: {
@@ -48,6 +56,8 @@ export default {
     [List.name]: List,
     [Image.name]: Image,
     [Tag.name]: Tag,
+    [Button.name]: Button,
+    [Toast.name]: Toast,
     Tabbar
   },
   data() {
@@ -98,8 +108,19 @@ export default {
       this.tabName = name;
       this.fetchTopicList(true);
     },
-    handleCollectClick: function(id) {
-      console.log(id);
+    handleCollectClick: async function(id) {
+      let params = {
+        accesstoken: localStorage.WM_token,
+        topic_id: id
+      };
+      let success = await fetch(api_topic_collect, {
+        method: "post",
+        body: JSON.stringify(params),
+        returnBoolean: true
+      });
+      if (success) {
+        Toast.success("收藏成功");
+      }
     }
   }
 };

@@ -31,9 +31,9 @@ export default {
         },
         {
           id: 2,
-          key: "about",
-          name: "关于",
-          path: "/about",
+          key: "collect",
+          name: "收藏",
+          path: "/collect",
           icon: "notes-o"
         },
         {

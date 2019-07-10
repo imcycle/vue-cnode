@@ -7,26 +7,25 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'home',
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ './views/About')
+      path: '/collect',
+      name: 'collect',
+      component: () => import( /* webpackChunkName: "about" */ './views/Collect')
     },
     {
       path: '/center',
       name: 'center',
-      component: () => import(/* webpackChunkName: "center" */ './views/Center')
+      component: () => import( /* webpackChunkName: "center" */ './views/Center')
     },
     {
       path: '/test',
       name: 'test',
-      component: () => import(/* webpackChunkName: "test" */ './views/Test')
+      component: () => import( /* webpackChunkName: "test" */ './views/Test')
     }
   ]
 })
