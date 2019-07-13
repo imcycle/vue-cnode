@@ -23,6 +23,11 @@ export default new Router({
       component: () => import( /* webpackChunkName: "center" */ './views/Center')
     },
     {
+      path: '/article/:id',
+      name: 'article',
+      component: () => import( /* webpackChunkName: "article" */ './views/Article')
+    },
+    {
       path: '/test',
       name: 'test',
       component: () => import( /* webpackChunkName: "test" */ './views/Test')

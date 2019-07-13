@@ -18,7 +18,11 @@
           <van-image width="1rem" height="1rem" :src="item.author.avatar_url" />
           <div class="flex-1 pl-20">
             <div>
-              <h3 class="space-nowrap lh-1_5" style="width: 2rem;">{{item.title}}</h3>
+              <h3
+                class="space-nowrap lh-1_5"
+                style="width: 2rem;"
+                @click="gotoArticle(item.id)"
+              >{{item.title}}</h3>
             </div>
             <div class="lh-1_5">
               <van-tag
@@ -107,6 +111,9 @@ export default {
     handleTabsChange: function(name) {
       this.tabName = name;
       this.fetchTopicList(true);
+    },
+    gotoArticle: function(id) {
+      this.$router.push(`/article/${id}`);
     },
     handleCollectClick: async function(id) {
       let params = {
