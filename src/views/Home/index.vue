@@ -14,32 +14,20 @@
         finished-text="没有更多了"
         @load="fetchTopicList"
       >
-        <div class="flex mb-20" v-for="item in topicList" :key="item.id">
-          <van-image width="1rem" height="1rem" :src="item.author.avatar_url" />
-          <div class="flex-1 pl-20">
-            <div>
-              <h3
-                class="space-nowrap lh-1_5"
-                style="width: 2rem;"
-                @click="gotoArticle(item.id)"
-              >{{item.title}}</h3>
-            </div>
-            <div class="lh-1_5">
-              <van-tag
-                type="danger"
-              >{{item.top && '置顶' || (item.good && '精选') || tabMap.get(item.tab)}}</van-tag>
-              {{item.reply_count}}/{{item.visit_count}}
-            </div>
-            <div class="lh-1_5">{{item.create_at}}</div>
-            <van-button
-              plain
-              hairline
-              type="primary"
-              size="small"
-              @click="handleCollectClick(item.id)"
-            >收藏</van-button>
-          </div>
-        </div>
+        <ArticleCard
+          v-for="item in topicList"
+          :key="item.id"
+          :myData="item"
+          v-on:onWrapClick="gotoArticle"
+        >
+          <van-button
+            plain
+            hairline
+            type="primary"
+            size="small"
+            @click="handleCollectClick(item.id)"
+          >收藏</van-button>
+        </ArticleCard>
       </van-list>
     </van-pull-refresh>
     <Tabbar />
@@ -47,8 +35,9 @@
 </template>
 
 <script>
-import { PullRefresh, Tab, Tabs, List, Image, Tag, Button, Toast } from "vant";
+import { PullRefresh, Tab, Tabs, List, Button, Toast } from "vant";
 import Tabbar from "@/components/Tabbar.vue";
+import ArticleCard from "@/components/ArticleCard.vue";
 import fetch from "@/utils/fetch";
 import { api_topics, api_topic_collect } from "@/utils/urls";
 export default {
@@ -58,20 +47,13 @@ export default {
     [Tab.name]: Tab,
     [Tabs.name]: Tabs,
     [List.name]: List,
-    [Image.name]: Image,
-    [Tag.name]: Tag,
     [Button.name]: Button,
     [Toast.name]: Toast,
+    ArticleCard,
     Tabbar
   },
   data() {
     return {
-      tabMap: new Map([
-        ["good", "精华"],
-        ["share", "分享"],
-        ["ask", "问答"],
-        ["job", "招聘"]
-      ]),
       isPullRefreshLoading: false,
       tab: "all",
       page: 0,
