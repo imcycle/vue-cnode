@@ -4,9 +4,9 @@
       <van-image width="100" height="100" :src="avatar_url" />
       <div>{{loginname}}</div>
     </div>
-    <div class="user-card" v-else>
-      <input v-model="token" />
-      <van-button @click="handleLoginClick">登陆</van-button>
+    <div class="user-card user-login-card" v-else>
+      <van-field class="mb-20" v-model="token" placeholder="请输入token" />
+      <van-button type="info" @click="handleLoginClick">登陆</van-button>
     </div>
     <van-cell title="消息" is-link />
     <Tabbar />
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { Button, Image, Cell, Toast } from "vant";
+import { Field, Button, Image, Cell, Toast } from "vant";
 import Tabbar from "@/components/Tabbar";
 import fetch from "@/utils/fetch";
 import { api_accesstoken } from "@/utils/urls";
@@ -22,6 +22,7 @@ import { api_accesstoken } from "@/utils/urls";
 export default {
   name: "center",
   components: {
+    [Field.name]: Field,
     [Button.name]: Button,
     [Image.name]: Image,
     [Cell.name]: Cell,
@@ -66,6 +67,11 @@ export default {
 .user-card {
   padding: 0.3rem 0;
   border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.user-login-card {
+  padding: 0.3rem;
 }
 </style>
 

@@ -53,25 +53,25 @@ p {
 }
 
 .m-20 {
-  padding: 20px;
+  margin: 20px;
 }
 .mx-20 {
-  padding: 0 20px;
+  margin: 0 20px;
 }
 .my-20 {
-  padding: 20px 0;
+  margin: 20px 0;
 }
 .mt-20 {
-  padding-top: 20px;
+  margin-top: 20px;
 }
 .mb-20 {
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 .ml-20 {
-  padding-left: 20px;
+  margin-left: 20px;
 }
 .mr-20 {
-  padding-right: 20px;
+  margin-right: 20px;
 }
 
 .lh-1_5 {

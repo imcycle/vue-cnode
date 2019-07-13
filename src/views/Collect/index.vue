@@ -62,6 +62,7 @@ export default {
     fetchCollectList: async function() {
       if (!this.loginname) {
         Toast.fail("请先登录");
+        return;
       }
       let data = await fetch(`${api_topic_collects}/${this.loginname}`);
       if (data) {
