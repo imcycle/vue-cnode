@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { Image, Tag, Button } from "vant";
+import { Image, Tag } from "vant";
 
 export default {
   name: "articlecard",

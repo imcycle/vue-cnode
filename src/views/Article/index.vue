@@ -16,13 +16,12 @@
 </template>
 
 <script>
-import { Field, Button, Image, Cell, Toast } from "vant";
 import CommentCard from "@/components/CommentCard.vue";
 import fetch from "@/utils/fetch";
 import { api_topic_id } from "@/utils/urls";
 
 export default {
-  name: "article",
+  name: "article1",
   components: {
     CommentCard
   },
